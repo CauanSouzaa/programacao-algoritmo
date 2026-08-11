@@ -1,0 +1,15 @@
+"""
+ETECVAV
+Turma: 1C2
+Aluno: Cauan Machado de Souza.
+Programa: Python, que diga se um número inteiro é positivo, negativo ou zero.
+Programa abaixo.
+"""
+
+numero = int(input("Digite um número inteiro"))
+if numero == 0:
+    print ("O seu número é zero.")
+elif numero > 0:
+    print ("O seu número é positivo.")
+else:
+    print ("O seu número é negativo.")
