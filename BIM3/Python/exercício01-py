@@ -1,9 +1,7 @@
 """
-ETECVAV
-Turma: 1C2
-Aluno: Cauan Machado de Souza.
-Programa: Python, que diga se um número inteiro é positivo, negativo ou zero.
-Programa abaixo.
+Autor: Cauan Machado de Souza
+Turma/instituição: 1C2 / ETECVAV
+Data: 11/08/2026
 """
 
 numero = int(input("Digite um número inteiro"))
