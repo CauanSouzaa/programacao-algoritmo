@@ -83,22 +83,22 @@ def make_order():
         print("Nenhum produto cadastrado.")
         return
 
-    cliente_nome = input("\n Nome do cliente: ")
+    cliente_nome = input("\n Nome/Cliente: ")
 
     list_products()
 
-    codigo = input("Digite o código do produto: ")
-    produto = find_product_by_code(codigo)
+    codigo = input("Codego: ")
+    Produto = find_product_by_code(codigo)
 
-    if produto is None:
-        print("\n Produto não existe.")
+    if Produto is None:
+        print("\n Inexistente.")
         return
 
-# Tratamento de erro denovo 
+# PRECAUÇÃO DE ERRO
     try:
         quantidade = int(input("Quantidade desejada: "))
     except ValueError:
-        print("\n Quantidade inválida, tente novamete. ")
+        print("\n Tente novamente.")
         return
 
     if quantidade <= 0:
@@ -106,10 +106,10 @@ def make_order():
         return
 
     if quantidade > produto["estoque"]:
-        print("Estoque insuficiente.")
+        print("Sem Estoque.")
         return
 
-    # Caucula o preço a pagar
+    # Calcula o valor:
     total = quantidade * produto["preço"]
 
     produto["estoque"] -= quantidade
