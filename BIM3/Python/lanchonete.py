@@ -105,44 +105,43 @@ def make_order():
         print("Quantidade inválida.")
         return
 
-    if quantidade > produto["estoque"]:
+    if quantidade > Produto["estoque"]:
         print("Sem Estoque.")
         return
 
     # Calcula o valor:
-    total = quantidade * produto["preço"]
+    total = quantidade * Produto["preço"]
 
-    produto["estoque"] -= quantidade
+    Produto["estoque"] -= quantidade
 
-    pedido = {
+    Pedido = {
         "cliente_nome": cliente_nome,
-        "produto_codigo": produto["codigo"],
-        "produto_nome": produto["nome"],
+        "produto_codigo": Produto["codigo"],
+        "produto_nome": Produto["nome"],
         "quantidade": quantidade,
         "total": total
     }
 
-    pedidos.append(pedido)
+    Pedidos.append(Pedido)
     save_data()
 
     print("Pedido realizado com sucesso ")
-    print(f"Total: R$ {total:.2f}")
+    print(f"Valor: R$ {total:.2f}")
 
-# Mostra todos os pedidos feitos
+# PEDIDOS FEITOS:
 def list_orders():
-    if len(pedidos) == 0:
-        print("Nenhum pedido realizado ")
+    if len(Pedidos) == 0:
+        print("Nenhum pedido realizado. ")
         return
     
     print("\n Pedidos:" )
-    for pedido in pedidos:
-        print(f"Cliente: {pedido['cliente_nome']}")
-        print(f"Produto: {pedido['produto_nome']}")
-        print(f"Quantidade: {pedido['quantidade']}")
-        print(f"Total: R$ {pedido['total']:.2f}")
+    for Pedido in Pedidos:
+        print(f"Cliente: {Pedido['cliente_nome']}")
+        print(f"Produto: {Pedido['produto_nome']}")
+        print(f"Quantidade: {Pedido['quantidade']}")
+        print(f"Total: R$ {Pedido['total']:.2f}")
         print("-" * 30)
 
-# Texto do menu
 def show_menu():
     print("\n Sistema Lanchonete ")
     print("1 - Cadastrar produto")
@@ -154,10 +153,10 @@ def show_menu():
 def main():
     load_data()
 
-    # Le oque o usuário digitou no menu 
+    # LER USUÁRIO QUE CADASTRA
     while True:
         show_menu()
-        opcao = input("\n escolha uma opção ")
+        opcao = input("\n Selecione uma opção ")
 
         #'match case' no lugar de 'if' para melhor leitura do código
         match opcao:
@@ -174,6 +173,6 @@ def main():
                 print("Sistema encerrado, até a próxima. ")
                 break
             case _:
-                print ("opção inválida, tente novamente ")
+                print ("opção inválida, tente novamente. ")
 
 main()
