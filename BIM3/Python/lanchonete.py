@@ -15,7 +15,7 @@ def load_data():
        return
 
     with open(DATA_FILE, "r", encoding="utf-8") as amassadordeboiprofissionalgooglepesquisarlanchonete:
-        data = json.load(amassadordeboiprofissionalgooglepesquisar)
+        data = json.load(amassadordeboiprofissionalgooglepesquisarlanchonete)
         Produtos = data.get("Produtos", [])
         Pedidos = data.get("Pedidos", [])
 
@@ -26,7 +26,7 @@ def save_data():
     }
     
     with open(DATA_FILE, "w", encoding="utf-8") as amassadordeboiprofissionalgooglepesquisarlanchonete:
-        json.dump(data, file, indent=4, ensure_ascii=False)
+        json.dump(data, file, indent=4, ensure_ascii=False) # type: ignore
 
 def register_product():
     print("\n Registre os produtos ")
@@ -176,3 +176,5 @@ def main():
                 print ("opção inválida, tente novamente. ")
 
 main()
+
+# Finalizado - 11/09/2026 | Cauan Machado de Souza.
