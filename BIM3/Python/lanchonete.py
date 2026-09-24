@@ -1,32 +1,55 @@
+# Cauan Machado, 20/09
+
 import json
 import os
 
 DATA_FILE = "lanchonete_dolaelecalabresonobru.json"
-2
+
 Produtos = []
 Pedidos = []
 
+
 def load_data():
-    global produtos, pedidos
+    global Produtos, Pedidos  # Corrigido: 'Produtos' e 'Pedidos' com inicial maiúscula
 
     if not os.path.exists(DATA_FILE):
-       Produtos = [] 
-       Pedidos = []
-       return
+        Produtos = []
+        Pedidos = []
+        return
 
-    with open(DATA_FILE, "r", encoding="utf-8") as amassadordeboiprofissionalgooglepesquisarlanchonete:
+    with open(
+        DATA_FILE,
+        "r",
+        encoding="utf-8",
+    ) as amassadordeboiprofissionalgooglepesquisarlanchonete:
         data = json.load(amassadordeboiprofissionalgooglepesquisarlanchonete)
         Produtos = data.get("Produtos", [])
         Pedidos = data.get("Pedidos", [])
 
+
 def save_data():
-    data = {
-        "Produtos": Produtos,
-        "Pedidos": Pedidos
-    }
-    
-    with open(DATA_FILE, "w", encoding="utf-8") as amassadordeboiprofissionalgooglepesquisarlanchonete:
-        json.dump(data, file, indent=4, ensure_ascii=False) # type: ignore
+    data = {"Produtos": Produtos, "Pedidos": Pedidos}
+
+    with open(
+        DATA_FILE,
+        "w",
+        encoding="utf-8",
+    ) as amassadordeboiprofissionalgooglepesquisarlanchonete:
+        # Corrigido: substituído 'file' por 'amassadordeboiprofissionalgooglepesquisarlanchonete'
+        json.dump(
+            data,
+            amassadordeboiprofissionalgooglepesquisarlanchonete,
+            indent=4,
+            ensure_ascii=False,
+        )
+
+
+def find_product_by_code(codigo):
+    for Produto in Produtos:
+        if Produto["codigo"] == codigo:
+            return Produto
+    return None
+
 
 def register_product():
     print("\n Registre os produtos ")
@@ -49,7 +72,7 @@ def register_product():
         "codigo": codigo,
         "nome": nome,
         "preço": preco,
-        "estoque": estoque
+        "estoque": estoque,
     }
 
     Produtos.append(Produto)
@@ -57,11 +80,12 @@ def register_product():
 
     print("Cadastrado!")
 
+
 def list_products():
     if len(Produtos) == 0:
-        print ("Nada cadastrado.")
+        print("Nada cadastrado.")
         return
-    
+
     print("\n Cadastrado!")
     for Produto in Produtos:
         print(f"Código: {Produto['codigo']}")
@@ -70,14 +94,7 @@ def list_products():
         print(f"Estoque: {Produto['estoque']}")
         print("-" * 30)
 
-# Para ver se o produto já existe:
-def find_product_by_code(codigo):
-    for Produto in Produtos:
-        if Produto["codigo"] == codigo:
-            return Produto
-    return None
 
-# PEDIDOO
 def make_order():
     if len(Produtos) == 0:
         print("Nenhum produto cadastrado.")
@@ -94,7 +111,6 @@ def make_order():
         print("\n Inexistente.")
         return
 
-# PRECAUÇÃO DE ERRO
     try:
         quantidade = int(input("Quantidade desejada: "))
     except ValueError:
@@ -109,7 +125,6 @@ def make_order():
         print("Sem Estoque.")
         return
 
-    # Calcula o valor:
     total = quantidade * Produto["preço"]
 
     Produto["estoque"] -= quantidade
@@ -119,7 +134,7 @@ def make_order():
         "produto_codigo": Produto["codigo"],
         "produto_nome": Produto["nome"],
         "quantidade": quantidade,
-        "total": total
+        "total": total,
     }
 
     Pedidos.append(Pedido)
@@ -128,19 +143,20 @@ def make_order():
     print("Pedido realizado com sucesso ")
     print(f"Valor: R$ {total:.2f}")
 
-# PEDIDOS FEITOS:
+
 def list_orders():
     if len(Pedidos) == 0:
         print("Nenhum pedido realizado. ")
         return
-    
-    print("\n Pedidos:" )
+
+    print("\n Pedidos:")
     for Pedido in Pedidos:
         print(f"Cliente: {Pedido['cliente_nome']}")
         print(f"Produto: {Pedido['produto_nome']}")
         print(f"Quantidade: {Pedido['quantidade']}")
         print(f"Total: R$ {Pedido['total']:.2f}")
         print("-" * 30)
+
 
 def show_menu():
     print("\n Sistema Lanchonete ")
@@ -150,31 +166,32 @@ def show_menu():
     print("4 - Ver pedidos realizados")
     print("5 - Sair")
 
+
 def main():
     load_data()
 
-    # LER USUÁRIO QUE CADASTRA
     while True:
         show_menu()
         opcao = input("\n Selecione uma opção ")
 
-        #'match case' no lugar de 'if' para melhor leitura do código
         match opcao:
-            case '1':
+            case "1":
                 register_product()
-            case '2':
+            case "2":
                 list_products()
-            case '3':
+            case "3":
                 make_order()
-            case '4':
+            case "4":
                 list_orders()
-            case '5':
+            case "5":
                 save_data()
                 print("Sistema encerrado, até a próxima. ")
                 break
             case _:
-                print ("opção inválida, tente novamente. ")
+                print("opção inválida, tente novamente. ")
 
-main()
+
+if __name__ == "__main__":
+    main()
 
 # Finalizado - 11/09/2026 | Cauan Machado de Souza.
